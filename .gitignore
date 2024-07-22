@@ -1,0 +1,24 @@
+# Node modules and other dependencies
+node_modules/
+*.log
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+*.swn
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Excel files generated
+*.xlsx
+*.xls

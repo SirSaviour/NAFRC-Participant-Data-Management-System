@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form to Excel</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Peronal Data Form for Reception of NADFRC Participant Course 2/24</h2>
+        <form id="dataForm">
+            <label for="rank_name">Rank/Name</label>
+            <input type="text" id="rank_name" name="Rank/Name">
+
+            <label for="svc_no">Svc No</label>
+            <input type="text" id="svc_no" name="Svc No">
+
+            <label for="age">Age</label>
+            <input type="number" id="age" name="Age" step="0.1">
+
+            <label for="service">Service</label>
+            <input type="text" id="service" name="Service">
+
+            <label for="trade_classification">Trade Classification</label>
+            <input type="text" id="trade_classification" name="Trade Classification">
+
+            <label for="gender">Gender</label>
+            <select id="gender" name="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="last_unit_served">Last Unit Served</label>
+            <input type="text" id="last_unit_served" name="Last Unit Served">
+
+            <label for="nok_details">NOK Details (including phone numbers)</label>
+            <input type="text" id="nok_details" name="NOK details including phone numbers">
+
+            <label for="participant_phone_numbers">Phone Numbers of Participants</label>
+            <input type="tel" id="participant_phone_numbers" name="Phone Numbers of participants">
+
+            <label for="state_of_origin">State of Origin</label>
+            <input type="text" id="state_of_origin" name="State of Origin">
+
+            <label for="lga">LGA</label>
+            <input type="text" id="lga" name="LGA">
+
+            <label for="marital_status">Marital Status</label>
+            <input type="text" id="marital_status" name="Marital Status">
+
+            <label for="num_children_wives">Number of Children/Wives</label>
+            <input type="text" id="num_children_wives" name="Number of Children/Wives">
+
+            <label for="hobbies">Hobbies</label>
+            <input type="text" id="hobbies" name="Hobbies">
+
+            <label for="sports_games_played">Sports/Games Played</label>
+            <input type="text" id="sports_games_played" name="Sports/Games Played">
+
+            <label for="physical_defects">Physical Defects</label>
+            <input type="text" id="physical_defects" name="Physical Defects">
+
+            <label for="tribal_marks">Tribal Marks</label>
+            <input type="text" id="tribal_marks" name="Tribal Marks">
+
+            <label for="height">Height</label>
+            <input type="number" id="height" name="Height" step="0.1">
+
+            <label for="weight">Weight</label>
+            <input type="number" id="weight" name="Weight" step="0.1">
+
+            <label for="bmi">BMI</label>
+            <input type="number" id="bmi" name="BMI" step="0.1">
+        </form>
+        <input type="button" value="Submit" onclick="submitForm()">
+        <input type="button" value="Download Excel" onclick="downloadExcel()">
+    </div>
+
+    <!-- Go to top button -->
+    <button onclick="topFunction()" id="goTopBtn" title="Go to top">↑</button>
+
+    <!-- Include SheetJS library from CDN -->
+    <!--script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script-->
+
+    <!-- Include SheetJS library locally -->
+    <script src="js/xlsx.full.min.js"></script>
+    
+    <script>
+        // Array to store form data
+        let formDataArray = [];
+
+        function submitForm() {
+            const formElements = document.getElementById('dataForm').elements;
+            const formData = Array.from(formElements).filter(el => el.tagName === 'INPUT' || el.tagName === 'SELECT').map(el => el.value);
+
+            // Add form data to array
+            formDataArray.push(formData);
+
+            // Clear form
+            document.getElementById('dataForm').reset();
+            alert("Form submitted successfully!");
+        }
+
+        function downloadExcel() {
+            if (formDataArray.length === 0) {
+                alert("No data to download.");
+                return;
+            }
+
+            const formElements = document.getElementById('dataForm').elements;
+            const headers = Array.from(formElements).filter(el => el.tagName === 'INPUT' || el.tagName === 'SELECT').map(el => el.name);
+
+            const data = [headers, ...formDataArray];
+
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+            XLSX.writeFile(wb, "formData.xlsx");
+        }
+
+        // Go to top button functionality
+        const goTopBtn = document.getElementById("goTopBtn");
+
+        window.onscroll = function() { scrollFunction(); };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                goTopBtn.style.display = "block";
+            } else {
+                goTopBtn.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
