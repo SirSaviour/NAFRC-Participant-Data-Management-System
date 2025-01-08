@@ -1,7 +1,7 @@
 # NAFRC Participant Data Management System
 
 ## Description
-This project provides a web-based form to collect and manage personal data of NAFRC participants. The form data can be submitted and downloaded as an Excel file, and all entries are stored in a single Excel document.
+This project provides a web-based form to collect and manage personal data of NAFRC participants. The form data can be submitted and downloaded as an Excel file, and all entries are stored in a single Excel document. Hosted at https://sirsaviour.github.io/NAFRC-Participant-Data-Management-System/
 
 ## Features
 - Responsive form with various fields
